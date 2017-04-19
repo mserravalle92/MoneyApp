@@ -9,7 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Transactions } from '../pages/transactions/transactions';
 import { Adding } from '../pages/adding/adding';
-
+import { Map } from '../pages/map/map';
+import {GeolocationService} from '../services/geolocation.service';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,7 +25,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
     Transactions,
-    Adding
+    Adding,
+    Map
   ],
   imports: [
     BrowserModule,
@@ -38,12 +41,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
     Transactions,
-    Adding
+    Adding,
+    Map
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GeolocationService
   ]
 })
 export class AppModule {}

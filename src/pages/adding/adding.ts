@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Transaction} from '../../database';
+import {GeolocationService} from '../../services/geolocation.service';
+
 
 
 /**
@@ -17,20 +19,46 @@ import {Transaction} from '../../database';
 export class Adding {
 
   model : Transaction = new Transaction(null, '');
+  shouldGeolocate : boolean = false;
+  shouldSend : boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocator : GeolocationService) {
   }
 
   ionViewDidLoad() {
+
   }
 
   save()
   {
-    this.model.save().then(result=>{
-      this.model = new Transaction(null,"");
-      this.navCtrl.pop();
-    });
+    if(this.shouldSend){
+      this.model.save().then(result=>{
+        this.model = new Transaction(null,"");
+        this.navCtrl.pop();
+      });
+    }
+
+  }
+
+  getLocation(){
+
+    if(this.shouldGeolocate){
+      this.shouldSend = false;
+      this.geolocator.get().then((resultado)=>{
+        this.model.setCoords(resultado.coords);
+        console.log(this.model);
+        this.shouldSend = true;
+
+
+      }).catch((err)=>console.log(err));
+    }
+    else{
+      this.model.cleanCoords();
+      console.log(this.model);
+
+    }
+
+
   }
 
 }

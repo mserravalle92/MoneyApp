@@ -50,6 +50,16 @@ export class Transaction implements ITransaction{
 
   }
 
+  setCoords(coords){
+    this.lat = coords.latitude;
+    this.lng = coords.longitude;
+  }
+
+  cleanCoords(){
+    this.lat = null;
+    this.lng = null;
+  }
+
   static all(){
     //Transaction.all()=> Todas las transactions
     // retorna un promise
