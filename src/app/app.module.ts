@@ -14,6 +14,7 @@ import {GeolocationService} from '../services/geolocation.service';
 import { Geolocation } from '@ionic-native/geolocation';
 
 
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
