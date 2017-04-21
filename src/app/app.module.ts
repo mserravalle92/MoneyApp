@@ -12,7 +12,8 @@ import { Adding } from '../pages/adding/adding';
 import { Map } from '../pages/map/map';
 import {GeolocationService} from '../services/geolocation.service';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import {GoogleMaps} from '@ionic-native/google-maps';
+import { Camera } from '@ionic-native/camera';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -50,7 +51,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GeolocationService
+    GeolocationService,
+    GoogleMaps,
+    Camera,
   ]
 })
 export class AppModule {}

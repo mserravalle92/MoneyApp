@@ -18,6 +18,7 @@
     "@angular/http": "4.0.0",
     "@angular/platform-browser": "4.0.0",
     "@angular/platform-browser-dynamic": "4.0.0",
+    "@ionic-native/camera": "^3.5.0",
     "@ionic-native/core": "^3.4.2",
     "@ionic-native/geolocation": "^3.5.0",
     "@ionic-native/google-maps": "^3.5.0",
@@ -44,6 +45,10 @@
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard"
   ],
+  "config": {
+    "ionic_bundler": "webpack",
+    "ionic_source_map": "source-map"
+  },
   "cordovaPlatforms": [],
   "description": "MoneyMap: An Ionic project"
 }

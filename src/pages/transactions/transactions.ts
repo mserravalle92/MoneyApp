@@ -24,9 +24,11 @@ export class Transactions {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  ngAfterViewInit() {
+    this.loadTransactions();
+  }
+
   ionViewWillEnter() {
-    // let transaction = new Transaction(20,"Primera Transaccion");
-    // transaction.save();
 
     this.loadTransactions();
   }
@@ -36,7 +38,6 @@ loadTransactions(){
   Transaction.all()
              .then((resultados)=>{
                this.transactions = resultados
-               console.log(this.transactions);
              });
 }
 }

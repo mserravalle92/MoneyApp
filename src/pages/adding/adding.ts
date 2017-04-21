@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Transaction} from '../../database';
 import {GeolocationService} from '../../services/geolocation.service';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 
@@ -22,7 +23,7 @@ export class Adding {
   shouldGeolocate : boolean = false;
   shouldSend : boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocator : GeolocationService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocator : GeolocationService,private camera: Camera) {
   }
 
   ionViewDidLoad() {
@@ -38,6 +39,22 @@ export class Adding {
       });
     }
 
+  }
+
+  getPhoto(){
+
+    let cameraOptions : CameraOptions={
+      quality:80,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      allowEdit:false,
+      encodingType:this.camera.EncodingType.JPEG,
+
+    };
+
+    this.camera.getPicture(cameraOptions).then((imageData)=>{
+      alert(imageData);
+    }).catch((err)=>console.log(err));
   }
 
   getLocation(){
