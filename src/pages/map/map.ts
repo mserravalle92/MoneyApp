@@ -11,6 +11,8 @@ import {
 } from '@ionic-native/google-maps';
 
 import {GeolocationService} from '../../services/geolocation.service';
+import {TransactionService} from '../../services/transactions.service';
+
 import {Transaction} from '../../database';
 
 /**
@@ -29,7 +31,10 @@ export class Map {
   map: GoogleMap = null;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocator : GeolocationService,private googleMaps: GoogleMaps) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public geolocator : GeolocationService,
+              private googleMaps: GoogleMaps,
+              private transactionService : TransactionService) {
 
   }
 
@@ -43,7 +48,7 @@ export class Map {
   }
 
   loadMarkers(){
-    Transaction.all().then((results)=>this.loadTransactionMarkers(results))
+    this.transactionService.all().then((results)=>this.loadTransactionMarkers(results))
   }
 
   loadTransactionMarkers(transactions){
@@ -52,11 +57,15 @@ export class Map {
 
 
         let transaction = transactions[i];
+
+
+        if(!transaction.hasLocation()) continue;
+
         let markerLocation : LatLng = new LatLng(transaction.lat,transaction.lng);
         let markerOptions : MarkerOptions = {
           position:markerLocation,
           title:transaction.title,
-          icon:'blue'
+          icon: transaction.getImage()
         };
         this.map.addMarker(markerOptions).then((marker:Marker)=>{
           marker.showInfoWindow();

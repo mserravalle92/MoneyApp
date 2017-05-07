@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "659497551988",
+    "firebase_url": "https://moneymapapp-165115.firebaseio.com",
+    "project_id": "moneymapapp-165115",
+    "storage_bucket": "moneymapapp-165115.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659497551988:android:060716fc82f60e0f",
+        "android_client_info": {
+          "package_name": "com.mserravalle.moneymap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659497551988-ujk3ugm1vf230mv4dbk8v4gm3k8bl1pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhaP5KGVJ6ToNzS1ngKR7DjBPePinQ2Hw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import db from '../database';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { Firebase } from '@ionic-native/firebase';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,12 +14,20 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any = TabsPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private firebase: Firebase) {
+
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
-  }
+
+      this.firebase.getToken()
+          .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
+          .catch(error => console.error('Error getting token', error));
+
+          this.firebase.onTokenRefresh()
+          .subscribe((token: string) => console.log(`Got a new token ${token}`));
+
+          statusBar.styleDefault();
+          splashScreen.hide();
+
+        });
+      }
 }

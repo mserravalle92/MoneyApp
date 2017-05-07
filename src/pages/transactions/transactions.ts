@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Transaction} from '../../database';
 import {Adding} from '../adding/adding';
+import {WalletService} from '../../services/wallets.service'
+import { TransactionService } from '../../services/transactions.service'
+import {IWallet} from '../../database';
+
+
 
 
 /**
@@ -20,24 +25,37 @@ export class Transactions {
   title : string = "Movimientos";
   transactions: any;
   addingPage = Adding;
+  wallet : IWallet = {amount:0,name:""};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private walletService : WalletService,
+              private transactionService : TransactionService
+            ) {
   }
 
-  ngAfterViewInit() {
-    this.loadTransactions();
-  }
+
 
   ionViewWillEnter() {
 
+    if(this.walletService.empty()){
+      this.walletService.validateFirstWallet();
+    }
+
     this.loadTransactions();
+    this.loadWallet();
+
   }
 
 
 loadTransactions(){
-  Transaction.all()
+  this.transactionService.all()
              .then((resultados)=>{
                this.transactions = resultados
              });
 }
+
+loadWallet(){
+  this.walletService.getMainWallet().then(wallet=> this.wallet = wallet);
+}
+
 }

@@ -14,19 +14,22 @@
 
 
 <ion-content padding>
+  <div class="red amount-field" [ngClass]="{'green': income}">
+    <input type="number" [(ngModel)]="model.amount" autofocus="true" placeholder="0">
+  </div>
   <ion-item>
     <ion-label floating>Descripción</ion-label>
     <ion-input type="text" [(ngModel)]="model.title"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label floating>Monto</ion-label>
-    <ion-input type="number" [(ngModel)]="model.amount"></ion-input>
-  </ion-item>
-  <ion-item>
     <ion-label >Guardar Ubicación</ion-label>
     <ion-toggle [(ngModel)]="shouldGeolocate" (ionChange)="getLocation()"></ion-toggle>
   </ion-item>
-
+  <ion-item>
+    <ion-label>Es Ingreso</ion-label>
+    <ion-toggle [(ngModel)]="income"></ion-toggle>
+  </ion-item>
+  <img [src]="imageData" *ngIf="imageData">
   <div class="actions" >
     <button ion-button clear (click)="getPhoto()">
       <ion-icon name="add"> </ion-icon>
